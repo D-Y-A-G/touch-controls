@@ -1,3 +1,12 @@
+const topHalf = document.getElementById("top-half");
+
+topHalf.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  console.log("Touches", e.touches.length);
+  console.log("Targets", e.targetTouches.length);
+  console.log("Changed", e.changedTouches.length);
+});
+
 document.addEventListener("touchstart", (e) => {
   [...e.changedTouches].forEach((touch) => {
     const dot = document.createElement("div");
@@ -18,6 +27,13 @@ document.addEventListener("touchmove", (e) => {
 });
 
 document.addEventListener("touchend", (e) => {
+  [...e.changedTouches].forEach((touch) => {
+    const dot = document.getElementById(touch.identifier);
+    dot.remove();
+  });
+});
+
+document.addEventListener("touchcancel", (e) => {
   [...e.changedTouches].forEach((touch) => {
     const dot = document.getElementById(touch.identifier);
     dot.remove();
